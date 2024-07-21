@@ -3,9 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joke Loaded</title>
+    <title>Random Jokes</title>
 </head>
+<style>
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+    background: aliceblue;
+    padding: 25px;
+    border-radius: 61px;
+    box-shadow: 8px 11px 10px -1px #dfdfdf;
+}
+button{
+    padding: 17px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: green;
+    color: #fafafa;
+    cursor: pointer;
+}
+button:hover{
+    background: rgb(63, 166, 63);
+    transition: 0.5s ease-in-out;
+}
+
+</style>
+
+<!-- use -->
+<!-- https://official-joke-api.appspot.com/random_joke -->
 <body>
-    
+    <div class="container">
+        <h1>Random Jokes</h1>
+        <h3><span id="setup"></span></h3>
+        <h3><span id="punchline"></span></h3>
+        <h3><span id="count"></span></h3>
+        <!-- <img height="300" width="300" alt="Loading.."/> -->
+        <p><i>Please Click the Button..</i></p>
+        <button onclick="getJokes()">Change Meme</button>
+    </div>
 </body>
+
+<script>
+    function getJokes(){
+        fetch('https://official-joke-api.appspot.com/random_joke').then(res=>res.json()).then(data=>
+        getData(data.setup,data.punchline)
+        // console.log(data)
+    );
+    }
+    function getData(setup,punchline){
+        const punch =document.getElementById('punchline');
+        const set = document.getElementById('setup');
+        const countdown = document.getElementById("count");
+        // set.innerHTML='';
+        set.innerHTML=setup;
+        punch.innerHTML='';
+        countdown.innerHTML='';
+        let counter =3;
+
+       const interval =  setInterval(()=>{
+            countdown.innerHTML=counter;
+            if(counter === 0){
+                clearInterval(interval);
+            countdown.innerHTML = '';
+            punch.innerHTML = punchline;
+
+            }else{
+                counter--;
+            }
+        },1500)
+        
+    }
+</script>
 </html>
