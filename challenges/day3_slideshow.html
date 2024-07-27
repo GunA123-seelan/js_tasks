@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Show</title>
+</head>
+<style>
+    img{
+       width: 100%; 
+       height: 700px;  
+    }
+    div{
+    display: flex;
+    flex-direction: column;
+    }
+</style>
+<body>
+<div>
+    <img src="./img/stor_1.webp" class="guna">
+    <img src="./img/stor_2.webp" class="guna">
+    <img src="./img/stor_3.jpg" class="guna">
+    <img src="./img/stor_7.jpg" class="guna">
+    <img src="./img/store_5.jpg" class="guna">
+    <img src="./img/store_6.jpg" class="guna">
+</div>
+</body>
+
+<script>
+const myGuna=document.getElementsByClassName('guna');
+const leng=myGuna.length;
+let index=1;
+show();
+function show(){
+  for(i=0;i<leng;i++){
+    myGuna[i].style.display='none';
+  }
+  if(index <= leng){
+  myGuna[index-1].style.display='block';
+  
+  setTimeout(function() {
+                    index++;
+                    show();
+                    }, 2000);
+          }else{
+            index=1;
+            show();
+          }
+}
+</script>
+</html>
